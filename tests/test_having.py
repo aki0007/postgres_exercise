@@ -1,5 +1,4 @@
 import pytest
-import datetime
 
 
 @pytest.mark.parametrize("database", ["Employees"])
