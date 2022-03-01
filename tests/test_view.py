@@ -8,7 +8,7 @@ def test_view_1985_1986(cursor_dict, database):
     """
     Create a view "85-86" that shows all the employees, hired between 1985 and 1986
     """
-    query = """
+    view = """
     CREATE OR REPLACE VIEW employees_hired_between_1985_1986 AS
     SELECT * from employees 
     WHERE EXTRACT(YEAR FROM hire_date) BETWEEN 1985 and 1986
@@ -17,7 +17,7 @@ def test_view_1985_1986(cursor_dict, database):
     # Choose DB to execute queries on
     cursor = cursor_dict[database]
     # Execute query
-    cursor.execute(query)
+    cursor.execute(view)
 
     # Execute view and check if all info are returned
     cursor.execute("SELECT * FROM employees_hired_between_1985_1986 ORDER BY emp_no")
@@ -49,7 +49,7 @@ def test_view_bigbucks(cursor_dict, database):
 
     LIST INDEX OUT OF RANGE ERROR
     """
-    query = """
+    view = """
     CREATE OR REPLACE VIEW bigbucks AS 
     SELECT distinct on (e.emp_no)
     e.emp_no, s.salary FROM Employees as e
@@ -60,7 +60,7 @@ def test_view_bigbucks(cursor_dict, database):
     # Choose DB to execute queries on
     cursor = cursor_dict[database]
     # Execute query
-    cursor.execute(query)
+    cursor.execute(view)
 
     # Execute view and check if all info are returned
     cursor.execute("SELECT * FROM bigbucks")
